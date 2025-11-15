@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import SearchBar from "@/shared/components/SearchBar";
 import HeroTitle from "@/shared/components/HeroTitle";
 import { useRouter } from "next/navigation";
-import AirportCardList from "@/features/airports/components/AirportCardList";
+import AirportCardList from "@/features/airports/components/cards/AirportCardList";
 
 // Datos de aeropuertos desde la API es un mock, pero de datos reales.
 const apiResponse = {
