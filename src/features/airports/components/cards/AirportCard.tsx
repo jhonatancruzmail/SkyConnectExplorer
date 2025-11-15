@@ -2,12 +2,9 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Airport } from "@/types/airport";
 
-interface AirportCardProps {
-  name: string;
-  city: string;
-  country: string;
-  iataCode: string;
+interface AirportCardProps extends Airport {
   delay?: number;
 }
 
@@ -66,5 +63,3 @@ export default function AirportCard({
     </motion.div>
   );
 }
-
-
