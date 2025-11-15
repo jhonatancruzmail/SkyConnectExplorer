@@ -19,7 +19,7 @@ export default function SearchButton({
     <button
       type={type}
       onClick={onClick}
-      className={`h-[52px] px-6 pr-25 rounded-xl border-1 border-white bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-medium flex items-center gap-2 hover:from-blue-600 hover:to-cyan-500 transition-all shadow-sm ${className}`}
+      className={`h-[52px] px-6 pr-25 rounded-xl border-1 border-white bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-medium flex items-center justify-center gap-2 hover:from-blue-600 hover:to-cyan-500 transition-all shadow-sm ${className}`}
     >
       <Image
         src="/Magnifer.svg"

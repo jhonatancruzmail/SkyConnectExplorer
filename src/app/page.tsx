@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { SearchBar } from "@/features/airports";
+import SearchBar from "@/shared/components/SearchBar";
+import HeroTitle from "@/shared/components/HeroTitle";
 
 export default function Home() {
   const router = useRouter();
@@ -15,9 +16,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <main className="flex flex-col items-center gap-8">
-        <h1 className="font-inter text-7xl pb-20 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-black">
-          SkyConnect Explorer
-        </h1>
+        <HeroTitle title="SkyConnect Explorer" titleSize="large" spacing="large" />
         <SearchBar onSearch={handleSearch} />
       </main>
     </div>
