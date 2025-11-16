@@ -15,6 +15,10 @@ NEXT_PUBLIC_USE_MOCK_DATA=false
 # Ejecutar en desarrollo
 npm run dev
 ```
+<span style="color: red;">IMPORTANTE:</span><br>
+<span style="color: orange;">La primera vez que el servidor se inicia, la consulta inicial puede tardar 1–2 segundos porque debe cargar y almacenar en caché 10.000 aeropuertos. Este caché es exclusivamente del servidor, no del usuario, por lo que no se genera una demora por cada persona que use la aplicación.</span><br>
+<span style="color: green;">Ese proceso ocurre solo una vez por reinicio del servidor. Después de esa carga inicial, si vuelves a la página principal y realizas una nueva búsqueda, los resultados serán instantáneos para todos los usuarios.</span>
+
 
 ## 🏗️ Arquitectura y decisiones técnicas
 
@@ -166,4 +170,4 @@ Agregué tests unitarios para componentes clave. Por ejemplo, `SearchBar` tiene 
 | Agregar un historial de búsqueda almacenado en Zustand                                       | ❌ No  | No implementado                                 |
 | Implementar Dark Mode                                                                        | ❌ No  | No implementado                                 |
 | Pruebas de integración en Next.js para asegurar que la API se consume correctamente          | ❌ No  | Solo tests unitarios                            |
-| Hacerlo Responsive                                                                           | ❌ No  | Se puede mejorar, es un to-do por hacer          |
+| Hacerlo Responsive                                                                           | ❌ No  | Se puede mejorar, es un to-do por hacer         |
