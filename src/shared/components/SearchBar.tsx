@@ -42,8 +42,7 @@ export default function SearchBar({
     >
       <motion.div
         layout
-        className={`relative flex items-center ${layoutClasses[layout]} gap-2 ${layout === "horizontal" ? "mb-0" : "mb-0"
-          } ${layout === "vertical" ? "w-[780px]" : ""}`}
+        className={`relative flex items-center ${layoutClasses[layout]} gap-2 w-[780px]`}
         transition={{
           layout: {
             duration: 0.7,

@@ -123,7 +123,7 @@ function AirportDetailContent() {
                     <motion.h1
                         layoutId={`airport-title-${airport.iataCode}`}
                         layout
-                        className="text-5xl font-black text-gradient-blue-teal mb-8 text-center"
+                        className="text-5xl font-black text-gradient-blue-teal mb-8 w-fit mx-auto"
                         transition={{
                             layout: {
                                 duration: 0.7,
@@ -134,14 +134,14 @@ function AirportDetailContent() {
                         {airport.name}
                     </motion.h1>
 
-                    <div className="flex justify-between gap-4 mb-6 px-3 py-2 bg-[#3F495F] rounded-lg border border-white/20 overflow-hidden backdrop-blur-sm">
+                    <div className="flex justify-between gap-4 mb-8 px-3 py-2 bg-[#3F495F] rounded-lg border border-white/20 overflow-hidden backdrop-blur-sm">
                         {tabs.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`py-3 w-full rounded-md font-medium transition-all duration-200 ${activeTab === tab.id
                                     ? "bg-[#006FEE] text-white"
-                                    : "text-gray-400 hover:text-white hover:bg-white/10"
+                                    : "text-[#A2A2A2] hover:text-white hover:bg-white/10"
                                     }`}
                             >
                                 {tab.label}
@@ -156,7 +156,7 @@ function AirportDetailContent() {
                             <div className="w-1/2 flex flex-col p-6">
                                 <div className="flex items-center gap-2 mb-6">
                                     <Image src={getTabIcon(activeTab)} alt="Información" width={35} height={35} />
-                                    <h2 className="text-2xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                                    <h2 className="text-2xl font-black text-gradient-blue-teal w-fit">
                                         {getTabTitle(activeTab)}
                                     </h2>
                                 </div>
@@ -273,7 +273,7 @@ function AirportDetailContent() {
                                 <div className="w-1/2 flex flex-col p-8">
                                     <div className="flex items-center gap-2 mb-6">
                                         <Image src="/ClockCircle.svg" alt="Hora Local" width={35} height={35} />
-                                        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                                        <h2 className="text-2xl font-black text-gradient-blue-teal w-fit">
                                             Hora Local
                                         </h2>
                                     </div>

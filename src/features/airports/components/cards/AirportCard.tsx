@@ -56,7 +56,7 @@ export default function AirportCard({
               {city}, {country}
             </p>
           </div>
-          <div className="text-3xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mt-3">
+          <div className="text-3xl font-black text-gradient-blue-teal mt-3 w-fit">
             {iataCode}
           </div>
         </div>
