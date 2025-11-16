@@ -55,7 +55,7 @@ export default function SearchBar({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
-          className={`h-[52px] px-5 rounded-full bg-white text-lg font-normal placeholder-[#006FEE] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-blue-500 transition-all ${layout === "horizontal" ? "flex-1" : "w-full"
+          className={`h-[52px] px-5 rounded-full bg-white text-lg font-normal placeholder-[#006FEE] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-blue-500 transition-all ${layout === "horizontal" ? "flex-1" : "w-full mb-2"
             }`}
           aria-label="Buscar aeropuertos"
         />

@@ -19,14 +19,13 @@ export default function SearchButton({
     <button
       type={type}
       onClick={onClick}
-      className={`h-[52px] px-6 pr-25 rounded-xl border-1 border-white bg-gradient-blue-teal text-white font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-sm ${className}`}
+      className={`h-[52px] text-xl px-6 pr-25 rounded-xl border-1 border-white bg-gradient-blue-teal text-white font-medium flex items-center justify-center gap-2 opacity-80 transition-all shadow-sm ${className}`}
     >
       <Image
         src="/Magnifer.svg"
         alt="Buscar"
-        width={20}
-        height={20}
-        className="w-5 h-5"
+        width={30}
+        height={30}
       />
       <span>{children || "Buscar"}</span>
     </button>
