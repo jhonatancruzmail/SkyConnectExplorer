@@ -12,6 +12,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "SkyConnect Explorer",
   description: "Prueba técnica",
+  icons: {
+    icon: "/plane.ico",
+  },
 };
 
 export default function RootLayout({
