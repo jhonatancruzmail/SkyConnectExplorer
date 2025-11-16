@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { Airport } from "@/types/airport";
 
 interface AirportCardProps extends Airport {
@@ -15,6 +16,12 @@ export default function AirportCard({
   iataCode,
   delay = 0
 }: AirportCardProps) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/search/${iataCode}`);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 60 }}
@@ -24,6 +31,7 @@ export default function AirportCard({
         delay,
         ease: [0.25, 0.46, 0.45, 0.94]
       }}
+      onClick={handleClick}
       className="relative bg-black rounded-lg border border-white/50 hover:border-white/90 transition-[border-color] duration-300 overflow-hidden cursor-pointer group"
     >
       <div className="absolute inset-0 bg-gradient-to-r from-[#3F495F] to-[#0E1934] z-0" />
@@ -31,14 +39,24 @@ export default function AirportCard({
       <div className="relative flex h-full z-10">
         <div className="w-1/2 flex flex-col justify-between p-5">
           <div>
-            <h3 className="text-white font-medium text-lg mb-2 line-clamp-2">
+            <motion.h3
+              layoutId={`airport-title-${iataCode}`}
+              layout
+              className="text-white font-medium text-lg mb-2 line-clamp-2"
+              transition={{
+                layout: {
+                  duration: 0.7,
+                  ease: [0.4, 0, 0.2, 1]
+                }
+              }}
+            >
               {name}
-            </h3>
+            </motion.h3>
             <p className="text-gray-300 text-sm mb-3">
               {city}, {country}
             </p>
           </div>
-          <div className="text-3xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+          <div className="text-3xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mt-3">
             {iataCode}
           </div>
         </div>

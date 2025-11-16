@@ -3,13 +3,13 @@
 import { useRouter } from "next/navigation";
 import SearchBar from "@/shared/components/SearchBar";
 import HeroTitle from "@/shared/components/HeroTitle";
-
 export default function Home() {
   const router = useRouter();
 
   const handleSearch = (query: string) => {
-    if (query.trim()) {
-      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+    const trimmed = query.trim();
+    if (trimmed) {
+      router.push(`/search?q=${encodeURIComponent(trimmed)}`);
     }
   };
 

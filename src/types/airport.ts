@@ -33,6 +33,14 @@ export interface Airport {
     city: string;
     country: string;
     iataCode: string;
+    icaoCode?: string;
+    countryCode?: string;
+    latitude?: string;
+    longitude?: string;
+    timezone?: string;
+    phoneNumber?: string | null;
+    gmt?: string | null;
+    geonameId?: string;
 }
 
 // Parámetros para la búsqueda de aeropuertos, estos son los parametros que se pasan a la api de Aviationstack.

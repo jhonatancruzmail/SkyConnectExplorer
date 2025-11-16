@@ -34,8 +34,9 @@ function SearchContent() {
     }, [isLoading, allAirports.length]);
 
     const handleSearch = (newQuery: string) => {
-        if (newQuery.trim()) {
-            router.push(`/search?q=${encodeURIComponent(newQuery.trim())}`);
+        const trimmed = newQuery.trim();
+        if (trimmed) {
+            router.push(`/search?q=${encodeURIComponent(trimmed)}`);
         } else {
             router.push("/search");
         }

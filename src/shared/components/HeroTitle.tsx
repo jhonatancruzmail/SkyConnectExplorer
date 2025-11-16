@@ -25,7 +25,7 @@ export default function HeroTitle({ title, titleSize = "large", spacing = "large
         <motion.h1
             layoutId="hero-title"
             layout
-            className={`font-inter ${sizeClasses[titleSize]} ${spacingClasses[spacing]} bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-black`}
+            className={`font-inter ${sizeClasses[titleSize]} ${spacingClasses[spacing]} text-gradient-blue-teal font-black`}
             transition={{
                 layout: {
                     duration: 0.7,

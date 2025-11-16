@@ -3,11 +3,21 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --gradient-blue-teal: linear-gradient(90deg, #006AFF 0%, #00F9FF 100%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --gradient-blue-teal: var(--gradient-blue-teal);
+}
+
+.text-gradient-blue-teal {
+  background: var(--gradient-blue-teal);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .font-inter {
