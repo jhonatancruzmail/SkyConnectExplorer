@@ -1,6 +1,6 @@
 import { AirportApiData } from '@/types/airport';
 
-const AVIATIONSTACK_API_URL = 'http://api.aviationstack.com/v1/airports'; // URL de la API de Aviationstack, no es una variable de entorno porque no veo necesidad de cambiarla.
+const AVIATIONSTACK_API_URL = 'https://api.aviationstack.com/v1/airports'; // URL de la API de Aviationstack, no es una variable de entorno porque no veo necesidad de cambiarla.
 
 export interface AviationstackApiResponse {
     data: AirportApiData;
@@ -33,7 +33,14 @@ export async function fetchAirportsFromAviationstack(
     const response = await fetch(url.toString());
 
     if (!response.ok) {
-        throw new Error(`Aviationstack API error: ${response.status} ${response.statusText}`);
+        const errorText = await response.text().catch(() => 'Error desconocido');
+        throw new Error(`Aviationstack API error: ${response.status} ${response.statusText}. ${errorText.substring(0, 200)}`);
+    }
+
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        throw new Error(`Aviationstack API devolvió ${contentType || 'tipo desconocido'} en lugar de JSON. Posible API key inválida. Respuesta: ${text.substring(0, 200)}`);
     }
 
     const apiData: AirportApiData = await response.json();

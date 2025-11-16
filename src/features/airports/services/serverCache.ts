@@ -3,6 +3,7 @@ import { fetchAirportsFromAviationstack } from '../api/aviationstackApi';
 import { transformApiDataToAirports } from './airportsService';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
+const useMockData = process.env.NEXT_PUBLIC_USE_MOCK_DATA === 'true';
 
 interface ServerCache {
 	airports: Airport[];
@@ -15,7 +16,7 @@ let isLoading = false;
 let loadPromise: Promise<ServerCache> | null = null;
 
 async function loadMockData(): Promise<{ airports: Airport[]; total: number } | null> {
-	if (!isDevelopment) {
+	if (!isDevelopment || !useMockData) {
 		return null;
 	}
 
@@ -53,7 +54,8 @@ async function loadAllAirportsToCache(): Promise<ServerCache> {
 			throw new Error('AVIATIONSTACK_API_KEY no configurada. Se requiere una API key en producción.');
 		}
 
-		const { data: apiData, total } = await fetchAirportsFromAviationstack(apiKey);
+		// Cargar 10,000 aeropuertos en la primera llamada para evitar múltiples requests
+		const { data: apiData, total } = await fetchAirportsFromAviationstack(apiKey, 0, 10000);
 		const airports = transformApiDataToAirports(apiData);
 
 		serverCache = {
