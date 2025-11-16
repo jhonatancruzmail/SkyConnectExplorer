@@ -2,6 +2,7 @@
 
 import { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { motion } from "framer-motion";
 import SearchBar from "@/shared/components/SearchBar";
 import HeroTitle from "@/shared/components/HeroTitle";
 import { useRouter } from "next/navigation";
@@ -45,7 +46,7 @@ function SearchContent() {
     return (
         <div className="flex min-h-screen flex-col w-full">
             <header className="flex items-center justify-between flex-row w-full py-7 px-12">
-                <HeroTitle title="SkyConnect Explorer" titleSize="small" spacing="small" />
+                <HeroTitle title="SkyConnect Explorer" titleSize="small" spacing="small" href="/" />
                 <SearchBar onSearch={handleSearch} layout="horizontal" />
             </header>
 
@@ -66,6 +67,14 @@ function SearchContent() {
                     <div className="mb-4 text-center">
                         <p className="text-gray-300 text-lg">
                             Aeropuertos encontrados para: <span className="font-semibold text-blue-400">{query}</span>
+                        </p>
+                    </div>
+                )}
+
+                {query && !isLoading && showItems && filteredAirports.length === 0 && (
+                    <div className="mb-4 text-center">
+                        <p className="text-gray-300 text-lg">
+                            No se encontraron coincidencias para: <span className="font-semibold text-blue-400">{query}</span>
                         </p>
                     </div>
                 )}

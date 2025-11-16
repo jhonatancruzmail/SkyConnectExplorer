@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import AirportCard from "./AirportCard";
 import Pagination from "@/shared/components/Pagination";
 import { useAirportsStore } from "@/features/airports/stores/airportsStore";
@@ -42,20 +43,24 @@ export default function AirportCardList() {
     );
   }
 
-  if (!isLoading && currentAirports.length === 0 && totalPages === 0) {
+  if (!isLoading && currentAirports.length === 0 && totalPages === 0 && searchQuery.trim()) {
     return null;
   }
 
   const columnsPerRow = 2;
-  const initialDelay = 0.2;
+  const initialDelay = 0.1;
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  const totalRows = Math.ceil(currentAirports.length / columnsPerRow);
+  const lastRowDelay = totalRows > 0 ? initialDelay + ((totalRows - 1) * 0.1) : initialDelay;
+  const paginationDelay = lastRowDelay + 0.2;
 
   return (
     <div className="w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
         {currentAirports.map((airport, index) => {
           const row = Math.floor(index / columnsPerRow);
-          const delay = initialDelay + (row * 0.2);
+          const delay = initialDelay + (row * 0.1);
 
           return (
             <AirportCard
@@ -70,11 +75,25 @@ export default function AirportCardList() {
         })}
       </div>
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      {totalPages > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            type: "spring",
+            stiffness: 150,
+            damping: 18,
+            delay: paginationDelay,
+            mass: 1.0
+          }}
+        >
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </motion.div>
+      )}
     </div>
   );
 }

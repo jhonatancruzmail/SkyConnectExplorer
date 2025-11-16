@@ -37,6 +37,7 @@ function AirportDetailContent() {
 
     const [activeTab, setActiveTab] = useState<Tab>("general");
     const [currentTime, setCurrentTime] = useState(new Date());
+    const [showContent, setShowContent] = useState(false);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -57,6 +58,17 @@ function AirportDetailContent() {
             });
         }
     }, []);
+
+    useEffect(() => {
+        if (!isLoading && airport) {
+            const timer = setTimeout(() => {
+                setShowContent(true);
+            }, 200);
+            return () => clearTimeout(timer);
+        } else {
+            setShowContent(false);
+        }
+    }, [isLoading, airport]);
 
 
     const getTabTitle = (tab: Tab): string => {
@@ -112,29 +124,61 @@ function AirportDetailContent() {
     ];
 
     return (
-        <div className="flex min-h-screen flex-col w-full">
+        <div className="flex min-h-screen flex-col w-full hide-scrollbar">
             <header className="flex items-center justify-between flex-row w-full py-7 px-12">
-                <HeroTitle title="SkyConnect Explorer" titleSize="small" spacing="small" />
+                <HeroTitle title="SkyConnect Explorer" titleSize="small" spacing="small" href="/" />
                 <SearchBar onSearch={handleSearch} layout="horizontal" />
             </header>
 
-            <main className="flex-1 flex flex-col items-center justify-start py-0 px-12 w-full">
+            <main className="flex-1 flex flex-col items-center justify-start py-0 px-12 w-full hide-scrollbar">
                 <div className="w-full max-w-7xl">
-                    <motion.h1
-                        layoutId={`airport-title-${airport.iataCode}`}
-                        layout
-                        className="text-5xl font-black text-gradient-blue-teal mb-8 w-fit mx-auto"
-                        transition={{
-                            layout: {
-                                duration: 0.7,
-                                ease: [0.4, 0, 0.2, 1]
-                            }
-                        }}
-                    >
-                        {airport.name}
-                    </motion.h1>
+                    <div className="relative flex items-center justify-center mb-8">
+                        <button
+                            onClick={() => router.back()}
+                            className="absolute left-0 flex items-center justify-center w-10 h-10 rounded-lg font-medium transition-all duration-300 text-white hover:opacity-90"
+                            style={{
+                                backgroundColor: 'rgba(0, 96, 255, 1)'
+                            }}
+                            aria-label="Volver atrás"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={2.5}
+                                stroke="currentColor"
+                                className="w-5 h-5"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                            </svg>
+                        </button>
+                        <motion.h1
+                            layoutId={`airport-title-${airport.iataCode}`}
+                            layout
+                            transition={{
+                                layout: {
+                                    duration: 0.7,
+                                    ease: [0.4, 0, 0.2, 1]
+                                }
+                            }}
+                            className="text-5xl font-black text-gradient-blue-teal w-fit"
+                        >
+                            {airport.name}
+                        </motion.h1>
+                    </div>
 
-                    <div className="flex justify-between gap-4 mb-8 px-3 py-2 bg-[#3F495F] rounded-lg border border-white/20 overflow-hidden backdrop-blur-sm">
+                    <motion.div
+                        initial={{ opacity: 0, y: 60 }}
+                        animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 130,
+                            damping: 17,
+                            delay: 0.4,
+                            mass: 1.1
+                        }}
+                        className="flex justify-between gap-4 mb-8 px-3 py-2 bg-[#3F495F] rounded-lg overflow-hidden backdrop-blur-sm"
+                    >
                         {tabs.map((tab) => (
                             <button
                                 key={tab.id}
@@ -147,9 +191,20 @@ function AirportDetailContent() {
                                 {tab.label}
                             </button>
                         ))}
-                    </div>
+                    </motion.div>
 
-                    <div className="relative bg-black rounded-lg border border-white/50 overflow-hidden">
+                    <motion.div
+                        initial={{ opacity: 0, y: 60 }}
+                        animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 130,
+                            damping: 17,
+                            delay: 0.55,
+                            mass: 1.1
+                        }}
+                        className="relative bg-black rounded-lg border border-white/50 overflow-hidden"
+                    >
                         <div className="absolute inset-0 bg-gradient-to-r from-[#3F495F] to-[#0E1934] z-0" />
 
                         <div className="relative flex h-full z-10">
@@ -239,10 +294,21 @@ function AirportDetailContent() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {activeTab === "ubicacion" && airport.latitude && airport.longitude && (
-                        <div className="w-full h-[500px] rounded-lg overflow-hidden mt-4">
+                        <motion.div
+                            initial={{ opacity: 0, y: 60 }}
+                            animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 130,
+                                damping: 17,
+                                delay: 0.7,
+                                mass: 1.1
+                            }}
+                            className="w-full h-[500px] rounded-lg overflow-hidden mt-4 mb-10"
+                        >
                             <MapContainer
                                 center={[parseFloat(airport.latitude), parseFloat(airport.longitude)]}
                                 zoom={13}
@@ -262,11 +328,22 @@ function AirportDetailContent() {
                                     </Popup>
                                 </Marker>
                             </MapContainer>
-                        </div>
+                        </motion.div>
                     )}
 
                     {activeTab === "zona-horaria" && (
-                        <div className="relative bg-black rounded-lg border border-white/50 overflow-hidden mt-6">
+                        <motion.div
+                            initial={{ opacity: 0, y: 60 }}
+                            animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 130,
+                                damping: 17,
+                                delay: 0.7,
+                                mass: 1.1
+                            }}
+                            className="relative bg-black rounded-lg border border-white/50 overflow-hidden mt-6"
+                        >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#3F495F] to-[#0E1934] z-0" />
 
                             <div className="relative flex h-full z-10">
@@ -294,7 +371,7 @@ function AirportDetailContent() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     )}
                 </div>
             </main>

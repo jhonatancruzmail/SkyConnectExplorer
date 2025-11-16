@@ -61,14 +61,17 @@ export default function Pagination({
 	if (totalPages <= 1) return null;
 
 	return (
-		<div className="flex items-center justify-center gap-2 mt-8">
+		<div className="flex items-center justify-center gap-4 mt-8">
 			<button
 				onClick={handlePrevious}
 				disabled={currentPage === 1}
 				className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${currentPage === 1
-					? "border border-white/30 border-dashed text-white/50 cursor-not-allowed"
-					: "bg-blue-500 text-white hover:bg-blue-600"
+					? "text-white/40 cursor-not-allowed"
+					: "text-white hover:opacity-90"
 					}`}
+				style={{
+					backgroundColor: currentPage === 1 ? 'rgba(0, 96, 255, 0.3)' : 'rgba(0, 96, 255, 1)'
+				}}
 			>
 				Anterior
 			</button>
@@ -89,10 +92,11 @@ export default function Pagination({
 					<button
 						key={pageNumber}
 						onClick={() => onPageChange(pageNumber)}
-						className={`w-10 h-10 rounded-lg font-medium transition-all duration-300 ${isActive
-							? "bg-blue-500 text-white"
-							: "bg-blue-500 text-white hover:bg-blue-600"
+						className={`w-10 h-10 rounded-lg font-medium transition-all duration-300 text-white hover:opacity-90 ${isActive ? 'ring-1 ring-white ring-offset-1 ring-offset-transparent scale-110' : ''
 							}`}
+						style={{
+							backgroundColor: isActive ? 'rgba(0, 96, 255, 1)' : 'rgba(0, 96, 255, 0.6)'
+						}}
 					>
 						{pageNumber}
 					</button>
@@ -103,9 +107,12 @@ export default function Pagination({
 				onClick={handleNext}
 				disabled={currentPage === totalPages}
 				className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${currentPage === totalPages
-					? "border border-white/30 border-dashed text-white/50 cursor-not-allowed"
-					: "bg-blue-500 text-white hover:bg-blue-600"
+					? "text-white/40 cursor-not-allowed"
+					: "text-white hover:opacity-90"
 					}`}
+				style={{
+					backgroundColor: currentPage === totalPages ? 'rgba(0, 96, 255, 0.3)' : 'rgba(0, 96, 255, 1)'
+				}}
 			>
 				Siguiente
 			</button>

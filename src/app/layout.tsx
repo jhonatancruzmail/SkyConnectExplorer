@@ -20,9 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="hide-scrollbar">
       <body
-        className={`${inter.variable} antialiased relative min-h-screen`}
+        className={`${inter.variable} antialiased relative min-h-screen hide-scrollbar`}
       >
         {children}
       </body>

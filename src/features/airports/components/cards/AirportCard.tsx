@@ -24,15 +24,19 @@ export default function AirportCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
       transition={{
-        duration: 0.7,
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
         delay,
-        ease: [0.25, 0.46, 0.45, 0.94]
+        mass: 1.2
       }}
       onClick={handleClick}
       className="relative bg-black rounded-lg border border-white/50 hover:border-white/90 transition-[border-color] duration-300 overflow-hidden cursor-pointer group"
+      style={{ willChange: "transform, opacity" }}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-[#3F495F] to-[#0E1934] z-0" />
 

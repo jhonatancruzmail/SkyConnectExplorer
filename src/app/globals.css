@@ -24,6 +24,24 @@
   background: var(--gradient-blue-teal);
 }
 
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
 .font-inter {
   font-family: var(--font-inter, 'Inter', sans-serif);
 }
@@ -41,6 +59,12 @@ body {
   font-family: var(--font-inter, 'Inter'), 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 500;
   position: relative;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body::before {
