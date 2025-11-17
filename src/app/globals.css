@@ -82,3 +82,15 @@ body::before {
   opacity: 0.2;
   z-index: -1;
 }
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(48, 102, 239, 0.252) 0%, rgba(32, 94, 251, 0.129) 0.01%, rgba(21, 101, 239, 0.194) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
