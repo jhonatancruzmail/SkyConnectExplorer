@@ -172,7 +172,7 @@ Agregué tests unitarios para componentes clave. Por ejemplo, `SearchBar` tiene 
 | Agregar pruebas unitarias con Jest + React Testing Library para al menos un componente clave | ✅ Sí  | Tests completos para `SearchBar`                |
 | **Bonus (opcional)**                                                                         |        |                                                 |
 | Mejorar la UI con animaciones o transiciones suaves                                          | ✅ Sí  | Framer Motion con animaciones fluidas           |
-| Agregar un historial de búsqueda almacenado en Zustand                                       | ❌ No  | No implementado                                 |
+| Agregar un historial de búsqueda almacenado en Zustand                                       | ✅ Sí  | Historial con dropdown en SearchBar, persistente en localStorage |
 | Implementar Dark Mode                                                                        | ❌ No  | No implementado                                 |
 | Pruebas de integración en Next.js para asegurar que la API se consume correctamente          | ❌ No  | Solo tests unitarios                            |
 | Hacerlo Responsive                                                                           | ❌ No  | Se puede mejorar, es un to-do por hacer         |

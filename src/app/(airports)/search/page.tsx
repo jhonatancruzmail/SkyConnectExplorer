@@ -22,6 +22,7 @@ function SearchContent() {
 
     const allAirports = useAirportsStore((state) => state.allAirports);
     const filteredAirports = useAirportsStore((state) => state.filteredAirports);
+    const addToSearchHistory = useAirportsStore((state) => state.addToSearchHistory);
 
     useEffect(() => {
         if (!isLoading && allAirports.length > 0) {
@@ -33,6 +34,13 @@ function SearchContent() {
             setShowItems(false);
         }
     }, [isLoading, allAirports.length]);
+
+    // Add search query to history when it changes
+    useEffect(() => {
+        if (query.trim()) {
+            addToSearchHistory(query);
+        }
+    }, [query, addToSearchHistory]);
 
     const handleSearch = (newQuery: string) => {
         const trimmed = newQuery.trim();
