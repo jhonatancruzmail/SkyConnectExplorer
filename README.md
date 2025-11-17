@@ -171,3 +171,13 @@ Agregué tests unitarios para componentes clave. Por ejemplo, `SearchBar` tiene 
 | Implementar Dark Mode                                                                        | ❌ No  | No implementado                                 |
 | Pruebas de integración en Next.js para asegurar que la API se consume correctamente          | ❌ No  | Solo tests unitarios                            |
 | Hacerlo Responsive                                                                           | ❌ No  | Se puede mejorar, es un to-do por hacer         |
+
+
+## 📌 Uso de datos
+
+Este proyecto **no incluye datos reales** de Aviationstack.  
+Se utiliza únicamente un **mock ficticio con un solo aeropuerto**, creado para pruebas y para replicar la estructura de la API.
+
+Los datos reales deben obtenerse mediante una **API key propia**.  
+Este repositorio no almacena, distribuye ni publica información proveniente de Aviationstack ni contiene datasets.
+
