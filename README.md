@@ -15,10 +15,10 @@ NEXT_PUBLIC_USE_MOCK_DATA=false
 # Ejecutar en desarrollo
 npm run dev
 ```
-<span style="color: red;">IMPORTANTE:</span><br>
-<span style="color: orange;">La primera vez que el servidor se inicia, la consulta inicial puede tardar 1–2 segundos porque debe cargar y almacenar en caché 10.000 aeropuertos. Este caché es exclusivamente del servidor, no del usuario, por lo que no se genera una demora por cada persona que use la aplicación.</span><br>
-<span style="color: green;">Ese proceso ocurre solo una vez por reinicio del servidor. Después de esa carga inicial, si vuelves a la página principal y realizas una nueva búsqueda, los resultados serán instantáneos para todos los usuarios.</span>
 
+<span style="color: red;">IMPORTANTE:</span><br>
+<span style="color: orange;">La primera vez que el servidor se inicia, la consulta inicial puede tardar 1–2 segundos. Esto ocurre porque el sistema carga y almacena en caché del servidor 10.000 aeropuertos en una sola llamada a la API externa. Esta estrategia reduce drásticamente los costos de API y mejora el rendimiento, ya que todas las búsquedas posteriores se realizan sobre datos en memoria sin necesidad de nuevas llamadas externas.</span><br>
+<span style="color: green;">Este proceso ocurre solo una vez por reinicio del servidor. Después de esa carga inicial, todas las peticiones (incluso de múltiples usuarios simultáneos) utilizan el caché del servidor, por lo que los resultados serán instantáneos sin generar costos adicionales de API. Para más detalles sobre esta decisión arquitectónica, consulta la sección <strong>"1. Sistema de cache en 3 capas"</strong> más abajo.</span>
 
 ## 🏗️ Arquitectura y decisiones técnicas
 
@@ -133,10 +133,10 @@ La ventaja es que todo lo relacionado con "aeropuertos" está junto en `features
 
 ## 📝 Variables de entorno
 
-| Variable                            | Descripción              | Requerida       |
-| ----------------------------------- | ------------------------ | --------------- |
-| `AVIATIONSTACK_API_KEY` | API key de Aviationstack | Sí (producción) |
-| `NEXT_PUBLIC_USE_MOCK_DATA`         | Activar datos mock       | No              |
+| Variable                    | Descripción              | Requerida       |
+| --------------------------- | ------------------------ | --------------- |
+| `AVIATIONSTACK_API_KEY`     | API key de Aviationstack | Sí (producción) |
+| `NEXT_PUBLIC_USE_MOCK_DATA` | Activar datos mock       | No              |
 
 **Nota**: Los datos mock contienen solo un registro de ejemplo. No se incluye la base de datos completa de aeropuertos de Aviationstack por razones de tamaño del repositorio y para evitar que se use el mock de manera incorrecta.
 
@@ -172,7 +172,6 @@ Agregué tests unitarios para componentes clave. Por ejemplo, `SearchBar` tiene 
 | Pruebas de integración en Next.js para asegurar que la API se consume correctamente          | ❌ No  | Solo tests unitarios                            |
 | Hacerlo Responsive                                                                           | ❌ No  | Se puede mejorar, es un to-do por hacer         |
 
-
 ## 📌 Uso de datos
 
 Este proyecto **no incluye datos reales** de Aviationstack.  
@@ -180,4 +179,3 @@ Se utiliza únicamente un **mock ficticio con un solo aeropuerto**, creado para 
 
 Los datos reales deben obtenerse mediante una **API key propia**.  
 Este repositorio no almacena, distribuye ni publica información proveniente de Aviationstack ni contiene datasets.
-
