@@ -36,13 +36,18 @@ npm run dev
 - Los usuarios que regresan no generan costos adicionales durante 24 horas
 - Respuestas instantáneas sin tocar el servidor
 
-**b) Server Cache (memoria)** - `serverCache.ts`
+**b) Server Cache (Next.js Cache API + memoria)** - `serverCache.ts`
 
+- Uso `unstable_cache` de Next.js para cache persistente que funciona incluso en entornos serverless como Vercel
+- El cache persiste por 24 horas y sobrevive a "cold starts" y múltiples instancias
+- Cache en memoria como capa adicional para acceso rápido mientras la función está "caliente"
 - Cargo 10,000 aeropuertos una sola vez en la primera petición a `/api/airports`
 - Todas las peticiones subsecuentes usan el cache, sin costos adicionales
 - Uso una Promise compartida para prevenir múltiples llamadas simultáneas
 - Si hay una carga en progreso, las otras peticiones esperan a que termine
 - Fallback a mock data si no hay API key (solo en desarrollo)
+
+**Nota sobre Vercel**: A diferencia del cache en memoria puro, el cache de Next.js se mantiene incluso cuando las funciones serverless se "enfrían" o se crean nuevas instancias, garantizando que solo se haga una llamada a la API externa cada 24 horas independientemente del tráfico.
 
 **c) Store (Zustand)** - Memoria del cliente
 
@@ -69,7 +74,7 @@ Usuario → Store → localStorage → /api/airports → Server Cache → Aviati
 - Control total sobre la lógica de filtrado
 - Sin costos adicionales por cada búsqueda
 
-**Trade-off**: La carga inicial de 10,000 aeropuertos puede ser lenta la primera vez, y si el servidor se reinicia, hay que volver a cargar todo. Sin embargo, esto es aceptable porque los aeropuertos son datos relativamente estáticos que no cambian frecuentemente, y el cache del servidor persiste durante toda la vida del proceso.
+**Trade-off**: La carga inicial de 10,000 aeropuertos puede ser lenta la primera vez. Sin embargo, esto es aceptable porque los aeropuertos son datos relativamente estáticos que no cambian frecuentemente. El cache de Next.js persiste por 24 horas incluso en entornos serverless, por lo que solo se recarga una vez al día automáticamente.
 
 #### 3. Reuso de componentes con animaciones fluidas
 
