@@ -8,6 +8,11 @@ import { useAirportsStore } from "@/features/airports/stores/airportsStore";
 
 const ITEMS_PER_PAGE = 6;
 
+/**
+ * A paginated list of `AirportCard` components.
+ * Uses the airports store to fetch current page data and render pagination controls.
+ * Handles initial loading and resets to page 1 when the search query changes.
+ */
 export default function AirportCardList() {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -21,7 +26,7 @@ export default function AirportCardList() {
     loadAllAirports();
   }, [loadAllAirports]);
 
-  // Resetear a página 1 cuando cambia la búsqueda
+  // Reset to page 1 when the search query changes
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery]);

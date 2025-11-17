@@ -1,6 +1,6 @@
 import { AirportApiData } from '@/types/airport';
 
-const AVIATIONSTACK_API_URL = 'https://api.aviationstack.com/v1/airports'; // URL de la API de Aviationstack, no es una variable de entorno porque no veo necesidad de cambiarla.
+const AVIATIONSTACK_API_URL = 'https://api.aviationstack.com/v1/airports'; // Aviationstack API URL. Not stored in env because it's unlikely to change.
 
 export interface AviationstackApiResponse {
     data: AirportApiData;
@@ -8,11 +8,15 @@ export interface AviationstackApiResponse {
 }
 
 /**
- * @param apiKey - API key de Aviationstack
- * @param offset - Offset para paginación (opcional)
- * @param limit - Límite de resultados (opcional)
- * @returns Datos de la API y total de aeropuertos
- * @throws Error si la llamada falla
+ * Fetch airports from the Aviationstack API.
+ * Provide your API key and optional `offset`/`limit` for pagination.
+ * The function validates responses and throws readable errors when something goes wrong.
+ *
+ * @param apiKey - Aviationstack API key
+ * @param offset - Pagination offset (optional)
+ * @param limit - Max records to return (optional)
+ * @returns An object with `data` and `total` count
+ * @throws Error with helpful message if the call fails or returns unexpected content
  */
 export async function fetchAirportsFromAviationstack(
     apiKey: string,

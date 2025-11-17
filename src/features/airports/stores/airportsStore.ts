@@ -5,6 +5,13 @@ import { Airport } from '@/types/airport';
 import { fetchAllAirports } from '../services/airportsApi';
 import { filterAirports } from '../services/airportsService';
 
+/**
+ * Airports Zustand store.
+ * Keeps `allAirports` (cached list), `filteredAirports` (current filtered result),
+ * and helpers to load data and paginate results.
+ * The `loadAllAirports()` action will fetch from the API route or local cache
+ * and populate both `allAirports` and `filteredAirports`.
+ */
 interface AirportsState {
 	allAirports: Airport[];
 	filteredAirports: Airport[];

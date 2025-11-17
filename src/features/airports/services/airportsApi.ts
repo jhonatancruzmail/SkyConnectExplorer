@@ -1,6 +1,14 @@
 import { Airport } from '@/types/airport';
 import { getCacheFromStorage, saveCacheToStorage } from './airportsCache';
 
+/**
+ * Get all airports from the `/api/airports` endpoint.
+ * First it checks a localStorage cache and returns it if available.
+ * Otherwise it fetches from the API route and caches the result locally.
+ *
+ * @returns An object with `{ airports, total }`.
+ * @throws When the network request fails.
+ */
 export async function fetchAllAirports(): Promise<{ airports: Airport[]; total: number }> {
   const cached = getCacheFromStorage();
   if (cached) {

@@ -9,6 +9,14 @@ interface AirportCardProps extends Airport {
   delay?: number;
 }
 
+/**
+ * Airport visual card.
+ * Accepts the `Airport` fields and an optional `delay` for the entrance animation.
+ * Clicking the card navigates to the airport details page at `/search/{iataCode}`.
+ *
+ * Example:
+ * <AirportCard name="..." city="..." country="..." iataCode="ABC" />
+ */
 export default function AirportCard({
   name,
   city,

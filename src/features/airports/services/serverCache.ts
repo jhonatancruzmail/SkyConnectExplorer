@@ -12,8 +12,8 @@ interface ServerCache {
 	timestamp: number;
 }
 
-// In-memory cache that's fast but volatile - gets cleared on cold starts
-// When the function is warm, this gives us instant access without disk I/O
+// In-memory cache: fast but volatile (cleared on cold starts).
+// When the function/container is warm, this provides instant access without disk I/O.
 let serverCache: ServerCache | null = null;
 let isLoading = false;
 let loadPromise: Promise<ServerCache> | null = null;
@@ -62,8 +62,9 @@ async function fetchAirportsData(): Promise<ServerCache> {
 	};
 }
 
-// Persistent cache that survives cold starts and works across multiple instances
-// Airport data doesn't change often, so 24-hour revalidation keeps it fresh without unnecessary API calls
+// Persistent cache that survives cold starts and works across instances.
+// Airport data changes infrequently; a 24-hour revalidation is enough to keep data fresh
+// while avoiding unnecessary external API calls.
 const getCachedAirportsData = unstable_cache(
 	async (): Promise<ServerCache> => {
 		try {
@@ -94,22 +95,35 @@ const getCachedAirportsData = unstable_cache(
 );
 
 async function loadAllAirportsToCache(): Promise<ServerCache> {
-	// Check in-memory cache first - fastest option when function is warm
+	// Prefer in-memory cache for fastest responses when the function is warm
 	if (serverCache) {
 		return serverCache;
 	}
 
 	// Fall back to persistent cache (survives cold starts and works across instances)
-	// Stored on disk, so it persists even when containers are destroyed
 	const cachedData = await getCachedAirportsData();
 
 	// Populate in-memory cache for faster subsequent requests in this container
-	// Two-tier approach: fast memory when warm, persistent disk for cold starts
+	// Two-tier approach: fast memory when warm, persistent cache for cold starts
 	serverCache = cachedData;
 
 	return cachedData;
 }
 
+/**
+ * Get all airports using a two-level cache so we don't hammer the external API.
+ *
+ * Behavior:
+ * - Prefer a fast in-memory cache when the server/container is warm.
+ * - If not available, use Next.js persistent cache that survives cold starts.
+ * - Share a single loading promise so only one fetch runs at a time.
+ *
+ * @returns Promise resolving to `{ airports, total }`.
+ * @throws If no API key is set in production or the fetch fails.
+ *
+ * @example
+ * const { airports, total } = await getServerCachedAirports();
+ */
 export async function getServerCachedAirports(): Promise<{ airports: Airport[]; total: number }> {
 	if (serverCache) {
 		return {
@@ -143,6 +157,12 @@ export async function getServerCachedAirports(): Promise<{ airports: Airport[]; 
 	}
 }
 
+/**
+ * Clears the in-memory server cache.
+ * 
+ * Useful for testing or forcing a fresh data load. Note that this only clears
+ * the in-memory cache; the persistent Next.js cache will still be used on next request.
+ */
 export function clearServerCache(): void {
 	serverCache = null;
 	isLoading = false;

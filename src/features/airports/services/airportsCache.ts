@@ -13,7 +13,10 @@ export interface CachedAirports {
 }
 
 /**
- * @returns Datos cacheados o null si no hay cache válido
+ * Try to read cached airports from localStorage.
+ * Returns `null` when there is no cache or the cache has expired.
+ *
+ * @returns CachedAirports or null
  */
 export function getCacheFromStorage(): CachedAirports | null {
     if (typeof window === 'undefined' || !ENABLE_CACHE) return null;
@@ -46,7 +49,10 @@ export function getCacheFromStorage(): CachedAirports | null {
 }
 
 /**
- * @param airports - Aeropuertos a guardar en cache
+ * Save airports to localStorage along with a timestamp.
+ * This is used to avoid refetching on subsequent visits within the cache window.
+ *
+ * @param airports - Airports to store in the cache
  */
 export function saveCacheToStorage(airports: Airport[]): void {
     if (typeof window === 'undefined' || !ENABLE_CACHE) return;

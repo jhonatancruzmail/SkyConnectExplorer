@@ -11,6 +11,18 @@ interface SearchBarProps {
   initialValue?: string;
 }
 
+/**
+ * Reusable search bar component.
+ *
+ * Props:
+ * - `onSearch(query)` called when the form is submitted.
+ * - `placeholder` input placeholder text.
+ * - `layout` either `horizontal` or `vertical`.
+ * - `initialValue` initial input value.
+ *
+ * Example:
+ * <SearchBar onSearch={(q) => setQuery(q)} layout="horizontal" />
+ */
 export default function SearchBar({
   onSearch,
   placeholder = "Buscar aeropuertos...",

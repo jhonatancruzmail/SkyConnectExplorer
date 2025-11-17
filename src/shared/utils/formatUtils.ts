@@ -1,20 +1,23 @@
 /**
- * Devuelve el valor proporcionado o un texto por defecto si el valor es null, undefined o vacío
- * @param value - Valor a verificar
- * @param defaultValue - Texto por defecto a mostrar si el valor no está disponible (por defecto: "No disponible")
- * @returns El valor si existe, o el texto por defecto
+ * Return the given value or a friendly fallback if the value is missing.
+ *
+ * @param value - Value to check
+ * @param defaultValue - Fallback text (default: "Not available")
+ * @returns The original value when present, otherwise the fallback text
  */
 export function getValueOrNotFound(
     value: string | null | undefined,
-    defaultValue: string = "No disponible"
+    defaultValue: string = "Not available"
 ): string {
     return value || defaultValue;
 }
 
 /**
- * Formatea una fecha en formato español: dd/mes/año, hora:minuto:segundo
- * @param date - Fecha a formatear
- * @returns Fecha formateada en español
+ * Format a Date into a readable local string: `dd/month/yyyy, hh:mm:ss`.
+ * Month names are in Spanish to match the app locale.
+ *
+ * @param date - Date instance to format
+ * @returns Human-friendly date/time string
  */
 export function formatLocalDateTime(date: Date): string {
     const months = [
@@ -33,9 +36,10 @@ export function formatLocalDateTime(date: Date): string {
 }
 
 /**
- * Normaliza un string para búsquedas (convierte a minúsculas y maneja valores null/undefined)
- * @param value - Valor a normalizar
- * @returns String normalizado en minúsculas o string vacío si el valor es null/undefined
+ * Normalize a string for search: lowercase + trim. Safely handles null/undefined.
+ *
+ * @param value - Value to normalize
+ * @returns Normalized lowercase string, or empty string when input is null/undefined
  */
 export function normalizeSearchString(value: string | null | undefined): string {
     return (value?.toLowerCase() || '').trim();

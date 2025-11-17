@@ -4,10 +4,11 @@ import { useEffect, useRef } from 'react';
 import { useAirportsStore } from '../stores/airportsStore';
 
 /**
- * Hook personalizado para obtener aeropuertos
- * 
- * @param query - Término de búsqueda
- * @returns Objeto con airports, isLoading, error, y funciones de paginación
+ * Hook that exposes airports data and helpers from the global store.
+ * Pass an optional `query` and it will keep the store search synced.
+ *
+ * @param query - Optional search string to initialize the store's search
+ * @returns An object: `{ airports, isLoading, error, getAirportsForPage, getTotalPages }`
  */
 export function useAirports(query: string = '') {
   const filteredAirports = useAirportsStore((state) => state.filteredAirports);

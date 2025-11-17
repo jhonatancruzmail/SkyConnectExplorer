@@ -2,8 +2,11 @@ import { AirportApiData, Airport } from '@/types/airport';
 import { normalizeSearchString } from '@/shared/utils/formatUtils';
 
 /**
- * @param apiData - Datos de la API
- * @returns Aeropuertos transformados al modelo de dominio
+ * Convert the external API payload into the app's Airport objects.
+ * This keeps field mappings explicit and easy to reason about.
+ *
+ * @param apiData - Data returned by the external API
+ * @returns An array of `Airport` objects ready for the UI/store
  */
 export function transformApiDataToAirports(apiData: AirportApiData): Airport[] {
   return apiData.data.map((airport) => ({
@@ -23,9 +26,13 @@ export function transformApiDataToAirports(apiData: AirportApiData): Airport[] {
 }
 
 /**
- * @param airports - Aeropuertos a filtrar
- * @param query - Query de búsqueda
- * @returns Aeropuertos filtrados
+ * Filter airports using a human-friendly search string.
+ * Matches against name, city, country and IATA code.
+ * If the query is empty, the original list is returned unchanged.
+ *
+ * @param airports - Array of airports to filter
+ * @param query - Search text
+ * @returns The filtered array of airports
  */
 export function filterAirports(airports: Airport[], query: string): Airport[] {
   if (!query.trim()) return airports;
