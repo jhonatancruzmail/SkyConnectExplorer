@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import { Analytics } from '@vercel/analytics/next';
 const inter = Inter({
   weight: ["300", "400", "500", "700", "900"],
   subsets: ["latin"],
@@ -28,6 +28,7 @@ export default function RootLayout({
         className={`${inter.variable} antialiased relative min-h-screen hide-scrollbar`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
