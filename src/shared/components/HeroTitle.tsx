@@ -33,12 +33,12 @@ export default function HeroTitle({ title, titleSize = "large", spacing = "large
     }, [titleSize]);
 
     const sizeClasses: Record<"large" | "small", string> = {
-        large: "text-7xl",
-        small: "text-3xl",
+        large: "text-4xl md:text-7xl",
+        small: "text-2xl md:text-3xl",
     };
 
     const spacingClasses: Record<"large" | "small", string> = {
-        large: "pb-20",
+        large: "pb-10 md:pb-20",
         small: "pb-0",
     };
 
@@ -51,7 +51,7 @@ export default function HeroTitle({ title, titleSize = "large", spacing = "large
     };
 
     const titleElement = (
-        <div className="flex items-center gap-4 relative">
+        <div className="flex items-center gap-2 md:gap-4 relative">
             <motion.h1
                 layoutId="hero-title"
                 layout
@@ -84,7 +84,7 @@ export default function HeroTitle({ title, titleSize = "large", spacing = "large
                         mass: 1.3
                     }
                 }}
-                className={`font-inter ${sizeClasses[titleSize]} ${spacingClasses[spacing]} text-gradient-blue-teal font-black relative z-10 ${isLarge ? "pl-24" : ""} ${href ? "cursor-pointer hover:opacity-80 transition-opacity" : ""}`}
+                className={`font-inter ${sizeClasses[titleSize]} ${spacingClasses[spacing]} text-gradient-blue-teal font-black relative z-10 ${isLarge ? "pl-4 md:pl-24" : ""} ${href ? "cursor-pointer hover:opacity-80 transition-opacity" : ""}`}
                 onClick={handleClick}
             >
                 {title}
@@ -123,7 +123,7 @@ export default function HeroTitle({ title, titleSize = "large", spacing = "large
                         alt="Avión"
                         width={80}
                         height={80}
-                        className="w-[80px] h-[80px]"
+                        className="w-[50px] h-[50px] md:w-[80px] md:h-[80px]"
                     />
                 </motion.div>
             )}

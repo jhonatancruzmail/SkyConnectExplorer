@@ -53,12 +53,12 @@ function SearchContent() {
 
     return (
         <div className="flex min-h-screen flex-col w-full">
-            <header className="flex items-center justify-between flex-row w-full py-7 px-12">
+            <header className="flex flex-col md:flex-row items-start md:items-center justify-between w-full py-7 px-4 md:px-12 gap-4 md:gap-0">
                 <HeroTitle title="SkyConnect Explorer" titleSize="small" spacing="small" href="/" />
                 <SearchBar onSearch={handleSearch} layout="horizontal" />
             </header>
 
-            <main className="flex-1 flex flex-col items-center justify-start py-0 px-12 w-full">
+            <main className="flex-1 flex flex-col items-center justify-start py-0 px-4 md:px-12 w-full">
                 {isLoading && (
                     <div className="mb-4 text-center">
                         <p className="text-gray-400 text-lg">Cargando aeropuertos...</p>

@@ -125,17 +125,17 @@ function AirportDetailContent() {
 
     return (
         <div className="flex min-h-screen flex-col w-full hide-scrollbar">
-            <header className="flex items-center justify-between flex-row w-full py-7 px-12">
+            <header className="flex flex-col md:flex-row items-start md:items-center justify-between w-full py-7 px-4 md:px-12 gap-4 md:gap-0">
                 <HeroTitle title="SkyConnect Explorer" titleSize="small" spacing="small" href="/" />
                 <SearchBar onSearch={handleSearch} layout="horizontal" />
             </header>
 
-            <main className="flex-1 flex flex-col items-center justify-start py-0 px-12 w-full hide-scrollbar">
+            <main className="flex-1 flex flex-col items-center justify-start py-0 px-4 md:px-12 w-full hide-scrollbar">
                 <div className="w-full max-w-7xl">
-                    <div className="relative flex items-center justify-center mb-8">
+                    <div className="relative flex items-center justify-center mb-6 md:mb-8">
                         <button
                             onClick={() => router.back()}
-                            className="absolute left-0 flex items-center justify-center w-10 h-10 rounded-lg font-medium transition-all duration-300 text-white hover:opacity-90"
+                            className="absolute left-0 flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-lg font-medium transition-all duration-300 text-white hover:opacity-90"
                             style={{
                                 backgroundColor: 'rgba(0, 96, 255, 1)'
                             }}
@@ -147,7 +147,7 @@ function AirportDetailContent() {
                                 viewBox="0 0 24 24"
                                 strokeWidth={2.5}
                                 stroke="currentColor"
-                                className="w-5 h-5"
+                                className="w-4 h-4 md:w-5 md:h-5"
                             >
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                             </svg>
@@ -161,7 +161,7 @@ function AirportDetailContent() {
                                     ease: [0.4, 0, 0.2, 1]
                                 }
                             }}
-                            className="text-5xl font-black text-gradient-blue-teal w-fit"
+                            className="text-2xl md:text-5xl font-black text-gradient-blue-teal w-fit px-8 md:px-0 text-center md:text-left"
                         >
                             {airport.name}
                         </motion.h1>
@@ -177,13 +177,13 @@ function AirportDetailContent() {
                             delay: 0.4,
                             mass: 1.1
                         }}
-                        className="flex justify-between gap-4 mb-8 px-3 py-2 bg-[#3F495F] rounded-lg overflow-hidden backdrop-blur-sm"
+                        className="flex flex-wrap md:flex-nowrap justify-between gap-2 md:gap-4 mb-6 md:mb-8 px-2 md:px-3 py-2 bg-[#3F495F] rounded-lg overflow-hidden backdrop-blur-sm"
                     >
                         {tabs.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`py-3 w-full rounded-md font-medium transition-all duration-200 ${activeTab === tab.id
+                                className={`py-2 md:py-3 w-[calc(50%-0.25rem)] md:w-full rounded-md font-medium transition-all duration-200 text-sm md:text-base ${activeTab === tab.id
                                     ? "bg-[#006FEE] text-white"
                                     : "text-[#A2A2A2] hover:text-white hover:bg-white/10"
                                     }`}
@@ -207,17 +207,17 @@ function AirportDetailContent() {
                     >
                         <div className="absolute inset-0 bg-gradient-to-r from-[#3F495F] to-[#0E1934] z-0" />
 
-                        <div className="relative flex h-full z-10">
-                            <div className="w-1/2 flex flex-col p-6">
-                                <div className="flex items-center gap-2 mb-6">
-                                    <Image src={getTabIcon(activeTab)} alt="Información" width={35} height={35} />
-                                    <h2 className="text-2xl font-black text-gradient-blue-teal w-fit">
+                        <div className="relative flex flex-col md:flex-row h-full z-10">
+                            <div className="w-full md:w-1/2 flex flex-col p-4 md:p-6">
+                                <div className="flex items-center gap-2 mb-4 md:mb-6">
+                                    <Image src={getTabIcon(activeTab)} alt="Información" width={28} height={28} className="md:w-[35px] md:h-[35px]" />
+                                    <h2 className="text-xl md:text-2xl font-black text-gradient-blue-teal w-fit">
                                         {getTabTitle(activeTab)}
                                     </h2>
                                 </div>
 
                                 {activeTab === "general" && (
-                                    <div className="space-y-4 text-gray-300">
+                                    <div className="space-y-3 md:space-y-4 text-gray-300 text-sm md:text-base">
                                         <div>
                                             <span className="text-white font-semibold">Código IATA:</span>
                                             <span className="ml-2 font-light text-white">{getValueOrNotFound(airport.iataCode)}</span>
@@ -246,7 +246,7 @@ function AirportDetailContent() {
                                 )}
 
                                 {activeTab === "ubicacion" && (
-                                    <div className="space-y-4 text-gray-300">
+                                    <div className="space-y-3 md:space-y-4 text-gray-300 text-sm md:text-base">
                                         <div>
                                             <span className="text-white font-semibold">Latitud:</span>
                                             <span className="ml-2 font-light text-white">{getValueOrNotFound(airport.latitude)}</span>
@@ -263,7 +263,7 @@ function AirportDetailContent() {
                                 )}
 
                                 {activeTab === "zona-horaria" && (
-                                    <div className="space-y-4 text-gray-300">
+                                    <div className="space-y-3 md:space-y-4 text-gray-300 text-sm md:text-base">
                                         <div>
                                             <span className="text-gray-400">Zona Horaria:</span>
                                             <span className="ml-2 font-light text-white">{getValueOrNotFound(airport.timezone)}</span>
@@ -282,8 +282,8 @@ function AirportDetailContent() {
                                 )}
                             </div>
 
-                            <div className="relative w-1/2 overflow-hidden">
-                                <div className="absolute inset-0 overflow-hidden rounded-r-lg">
+                            <div className="relative w-full md:w-1/2 h-48 md:h-auto overflow-hidden">
+                                <div className="absolute inset-0 overflow-hidden rounded-b-lg md:rounded-r-lg md:rounded-bl-none">
                                     <Image
                                         src="/plane.jpg"
                                         alt="Airplane"
@@ -307,7 +307,7 @@ function AirportDetailContent() {
                                 delay: 0.7,
                                 mass: 1.1
                             }}
-                            className="w-full h-[500px] rounded-lg overflow-hidden mt-4 mb-10"
+                            className="w-full h-[300px] md:h-[500px] rounded-lg overflow-hidden mt-4 mb-6 md:mb-10"
                         >
                             <MapContainer
                                 center={[parseFloat(airport.latitude), parseFloat(airport.longitude)]}
@@ -342,25 +342,25 @@ function AirportDetailContent() {
                                 delay: 0.7,
                                 mass: 1.1
                             }}
-                            className="relative bg-black rounded-lg border border-white/50 overflow-hidden mt-6"
+                            className="relative bg-black rounded-lg border border-white/50 overflow-hidden mt-4 md:mt-6 mb-6 md:mb-0"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#3F495F] to-[#0E1934] z-0" />
 
-                            <div className="relative flex h-full z-10">
-                                <div className="w-1/2 flex flex-col p-8">
-                                    <div className="flex items-center gap-2 mb-6">
-                                        <Image src="/ClockCircle.svg" alt="Hora Local" width={35} height={35} />
-                                        <h2 className="text-2xl font-black text-gradient-blue-teal w-fit">
+                            <div className="relative flex flex-col md:flex-row h-full z-10">
+                                <div className="w-full md:w-1/2 flex flex-col p-4 md:p-8">
+                                    <div className="flex items-center gap-2 mb-4 md:mb-6">
+                                        <Image src="/ClockCircle.svg" alt="Hora Local" width={28} height={28} className="md:w-[35px] md:h-[35px]" />
+                                        <h2 className="text-xl md:text-2xl font-black text-gradient-blue-teal w-fit">
                                             Hora Local
                                         </h2>
                                     </div>
-                                    <p className="text-2xl font-light text-white">
+                                    <p className="text-xl md:text-2xl font-light text-white">
                                         {formatLocalDateTime(currentTime)}
                                     </p>
                                 </div>
 
-                                <div className="relative w-1/2 overflow-hidden">
-                                    <div className="absolute inset-0 overflow-hidden rounded-r-lg">
+                                <div className="relative w-full md:w-1/2 h-48 md:h-auto overflow-hidden">
+                                    <div className="absolute inset-0 overflow-hidden rounded-b-lg md:rounded-r-lg md:rounded-bl-none">
                                         <Image
                                             src="/plane.jpg"
                                             alt="Airplane"

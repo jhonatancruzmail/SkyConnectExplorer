@@ -14,8 +14,8 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <main className="flex flex-col items-center gap-8 pb-30">
+    <div className="flex min-h-screen flex-col items-center justify-center px-4">
+      <main className="flex flex-col items-center gap-6 md:gap-8 pb-30 w-full max-w-6xl">
         <HeroTitle title="SkyConnect Explorer" titleSize="large" spacing="large" />
         <SearchBar onSearch={handleSearch} />
       </main>

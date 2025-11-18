@@ -58,6 +58,9 @@ export default function SearchBar({
     vertical: "flex-col",
   };
 
+  const mobileLayoutClass = "flex-row";
+  const desktopLayoutClass = layout === "horizontal" ? "md:flex-row" : "md:flex-col";
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(query);
@@ -124,7 +127,7 @@ export default function SearchBar({
       <motion.div
         ref={containerRef}
         layout
-        className={`relative flex items-center ${layoutClasses[layout]} gap-2 ${layout === "vertical" ? "w-[780px]" : "w-fit"}`}
+        className={`relative flex items-center ${mobileLayoutClass} ${desktopLayoutClass} gap-2 ${layout === "vertical" ? "w-full md:w-[780px]" : "w-fit"}`}
         transition={{
           layout: {
             type: "spring",
@@ -134,7 +137,7 @@ export default function SearchBar({
           }
         }}
       >
-        <div className={`relative ${layout === "horizontal" ? "w-3xl" : "w-2xl"}`}>
+        <div className={`relative flex-1 md:flex-none ${layout === "horizontal" ? "md:w-3xl" : "md:w-2xl"}`}>
           <input
             ref={inputRef}
             type="text"
@@ -142,7 +145,7 @@ export default function SearchBar({
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => hasHistory && setShowHistory(true)}
             placeholder={placeholder}
-            className={`h-[52px] px-5 rounded-full bg-white text-lg font-normal placeholder-[#006FEE] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-blue-500 transition-all flex-shrink-0 w-full ${layout === "vertical" ? "mb-2" : ""}`}
+            className={`h-[52px] px-5 rounded-full bg-white text-lg font-normal placeholder-[#006FEE] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-blue-500 transition-all flex-shrink-0 w-full ${layout === "vertical" ? "md:mb-2" : ""}`}
             aria-label="Buscar aeropuertos"
           />
 
