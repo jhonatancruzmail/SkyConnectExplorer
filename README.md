@@ -175,7 +175,7 @@ Agregué tests unitarios para componentes clave. Por ejemplo, `SearchBar` tiene 
 | Agregar un historial de búsqueda almacenado en Zustand                                       | ✅ Sí  | Historial con dropdown en SearchBar, persistente en localStorage |
 | Implementar Dark Mode                                                                        | ❌ No  | No implementado                                 |
 | Pruebas de integración en Next.js para asegurar que la API se consume correctamente          | ❌ No  | Solo tests unitarios                            |
-| Hacerlo Responsive                                                                           | ❌ No  | Se puede mejorar, es un to-do por hacer         |
+| Hacerlo Responsive                                                                           | ✅ Sí  | Responsive design para desktop y mobile       |
 
 ## 📌 Uso de datos
 
